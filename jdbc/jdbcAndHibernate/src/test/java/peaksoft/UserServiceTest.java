@@ -14,7 +14,7 @@ public class UserServiceTest {
 
     private final String testName = "Kanat";
     private final String testLastName = "Subanov";
-    private final byte testAge = 23;
+    private final byte testAge = 3;
 
     @Test
     public void dropUsersTable() {
@@ -41,7 +41,7 @@ public class UserServiceTest {
         try {
             userService.dropUsersTable();
             userService.createUsersTable();
-            userService.saveUser(testName, testLastName, testAge);
+            userService.saveUser(testName, testLastName, (byte)testAge);
 
             User user = userService.getAllUsers().get(0);
 
@@ -49,7 +49,7 @@ public class UserServiceTest {
                     || !testLastName.equals(user.getLastName())
                     || testAge != user.getAge()
             ) {
-                Assert.fail("User был некорректно добавлен в базу данных");
+                Assert.fail("user didn't add");
             }
 
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class UserServiceTest {
             List<User> userList = userService.getAllUsers();
 
             if (userList.size() != 1) {
-                Assert.fail("Проверьте корректность работы метода сохранения пользователя/удаления или создания таблицы");
+                Assert.fail("something didn't work");
             }
         } catch (Exception e) {
             Assert.fail("При попытке достать всех пользователей из базы данных произошло исключение\n" + e);
